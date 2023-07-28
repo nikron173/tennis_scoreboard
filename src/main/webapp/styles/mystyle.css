@@ -1,0 +1,17 @@
+html {
+    text-align: center;
+}
+table {
+    width: 500px; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+    /*border: 2px solid white; !* Прячем рамку вокруг таблицы *!*/
+    margin: auto;
+}
+td, th {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 2px solid maroon; /* Параметры рамки */
+    text-align: left; /* Выравнивание по центру */
+}
+.find-player-form{
+    padding-top: 5px;
+}

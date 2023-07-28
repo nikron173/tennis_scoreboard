@@ -1,5 +1,12 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<head>
+    <title>Title</title>
+</head>
 <body>
-<h2>Hello World!</h2>
+    <ul>
+        <li><a href="/new-match">Create new match</a></li>
+        <li><a href="/matches">List end matches</a></li>
+    </ul>
 </body>
 </html>
