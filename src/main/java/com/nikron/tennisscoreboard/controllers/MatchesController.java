@@ -21,6 +21,7 @@ public class MatchesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer countPage;
+        req.setAttribute("title", "Matches");
         if (req.getRequestURI().matches("/matches") && req.getQueryString() == null){
             countPage = finishedMatchesPersistenceService.getCountPageMatches(2);
             req.setAttribute("pageSize", countPage);

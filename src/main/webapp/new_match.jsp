@@ -1,5 +1,4 @@
-<html>
-<title>New Match</title>
+<%@include file="header.jsp" %>
 <body>
     <h1>New match tennis!<br></h1>
     <form method="post" action="/new-match">
@@ -14,5 +13,4 @@
         </label>
         <input type="submit" value="start">
     </form>
-</body>
-</html>
+    <%@include file="footer.jsp" %>

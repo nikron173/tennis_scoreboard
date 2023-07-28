@@ -18,6 +18,7 @@ public class NewMatchController extends HttpServlet {
     private final DaoPlayer daoPlayer = new DaoPlayer();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("title", "New-match");
         req.getRequestDispatcher("/new_match.jsp").forward(req, resp);
     }
 

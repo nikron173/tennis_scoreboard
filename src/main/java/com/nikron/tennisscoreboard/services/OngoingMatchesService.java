@@ -3,9 +3,10 @@ package com.nikron.tennisscoreboard.services;
 import com.nikron.tennisscoreboard.model.Score;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class OngoingMatchesService {
-    private static Map<UUID, Score> matchMapIsNotFinished = new HashMap<>();
+    private static Map<UUID, Score> matchMapIsNotFinished = new ConcurrentHashMap<>();
 
     public static void removeMatchFinished(UUID uuid){
         matchMapIsNotFinished.remove(uuid);
@@ -17,5 +18,9 @@ public class OngoingMatchesService {
 
     public static void addMatchNotFinished(UUID uuid, Score score){
         matchMapIsNotFinished.put(uuid, score);
+    }
+
+    public static Map<UUID, Score> getMatchMapIsNotFinished(){
+        return matchMapIsNotFinished;
     }
 }

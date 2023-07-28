@@ -1,10 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<html>
-<head>
-    <title>Match-score</title>
-    <link rel="stylesheet" href="styles/mystyle.css">
-</head>
+<%@include file="header.jsp" %>
 <body>
   <h1>Match identifier uuid - <c:out value="${uuid}"/></h1>
   <table>
@@ -49,5 +45,4 @@
       <input type="submit" name="addPointTwo" value="add point">
     </label>
   </form>
-</body>
-</html>
+  <%@include file="footer.jsp" %>

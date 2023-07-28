@@ -10,34 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d848a68-741e-4c1f-805a-7132309260ce" name="Changes" comment="В проект добавлена БД H2 in-memory">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/MatchScoreController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/MatchesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/NewMatchController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/dao/DaoInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/dao/DaoMatch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/dao/DaoPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/model/Match.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/model/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/model/Score.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/services/FinishedMatchesPersistenceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/services/MatchScoreCalculationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/services/OngoingMatchesService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/util/EntityManageFactoryUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/scripts/create.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/match_score.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/matches.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/new_match.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/styles/mystyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/UnfinishedMatchesController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/footer.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/header.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/unfinished_matches.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/MatchScoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/MatchScoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/MatchesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/MatchesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/NewMatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/controllers/NewMatchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/services/OngoingMatchesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/nikron/tennisscoreboard/services/OngoingMatchesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/match_score.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/match_score.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/matches.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/matches.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/new_match.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/new_match.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/styles/mystyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/styles/mystyle.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +33,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Interface" />
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -211,7 +197,7 @@
       <workItem from="1689510874780" duration="4412000" />
       <workItem from="1689610090580" duration="42530000" />
       <workItem from="1690073896727" duration="17900000" />
-      <workItem from="1690306219033" duration="13830000" />
+      <workItem from="1690306219033" duration="19773000" />
     </task>
     <task id="LOCAL-00001" summary="create project">
       <created>1689511057807</created>
@@ -220,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689511057807</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="В проект добавлена БД H2 in-memory">
+      <created>1690555503908</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1690555503908</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

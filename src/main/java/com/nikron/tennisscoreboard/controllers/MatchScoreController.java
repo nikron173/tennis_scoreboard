@@ -17,6 +17,7 @@ public class MatchScoreController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Score match = OngoingMatchesService.getMatchNotFinished(UUID.fromString(req.getParameter("uuid")));
+        req.setAttribute("title", "Game-match");
         if (match == null) {
             resp.sendRedirect("/matches");
             return;
