@@ -24,7 +24,7 @@ public class DaoPlayer implements DaoInterface<Player> {
         } catch (Exception e){
             e.printStackTrace();
             try {
-                throw new RuntimeException("Kek");
+                throw new RuntimeException(e);
             } finally {
                 if (tx != null) tx.rollback();
             }
@@ -51,7 +51,7 @@ public class DaoPlayer implements DaoInterface<Player> {
         } catch (Exception e){
             e.printStackTrace();
             try {
-                throw new RuntimeException("Kek");
+                throw new RuntimeException(e);
             } finally {
                 if (tx != null) tx.rollback();
             }
@@ -73,7 +73,7 @@ public class DaoPlayer implements DaoInterface<Player> {
         } catch (Exception e){
             e.printStackTrace();
             try {
-                throw new RuntimeException("Kek");
+                throw new RuntimeException(e);
             } finally {
                 if (tx != null) tx.rollback();
             }
@@ -95,7 +95,7 @@ public class DaoPlayer implements DaoInterface<Player> {
             tx.commit();
         } catch (Exception e){
             try {
-                throw new RuntimeException("Kek");
+                throw new RuntimeException(e);
             } finally {
                 if (tx != null) tx.rollback();
             }
@@ -119,7 +119,7 @@ public class DaoPlayer implements DaoInterface<Player> {
             tx.commit();
         } catch (Exception e){
             try {
-                throw new RuntimeException("Kek");
+                throw new RuntimeException(e);
             } finally {
                 if (tx != null) tx.rollback();
             }
@@ -142,7 +142,7 @@ public class DaoPlayer implements DaoInterface<Player> {
         } catch (Exception e){
             e.printStackTrace();
             try {
-                throw new RuntimeException("Kek");
+                throw new RuntimeException(e);
             } finally {
                 if (tx != null) tx.rollback();
             }

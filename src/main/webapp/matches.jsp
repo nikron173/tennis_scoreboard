@@ -34,7 +34,7 @@
         </c:choose>
     </div>
     <div class="find-player-form">
-        <form method="get" action="/matches">
+        <form method="get" action="<c:url value="${pageContext.request.contextPath}/matches"/>">
             <label> Match search by player:
                 <input type="text" name="filter_by_player_name">
             </label>

@@ -1,8 +1,11 @@
-html {
-    text-align: center;
+body {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
 }
 table {
     width: 500px; /* Ширина таблицы */
+    text-align: center;
     border-collapse: collapse; /* Убираем двойные линии между ячейками */
     /*border: 2px solid white; !* Прячем рамку вокруг таблицы *!*/
     margin: auto;
@@ -17,20 +20,31 @@ td, th {
 }
 .footer-class{
     background-color: darkturquoise;
-    clear: both;
-    position: relative;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     height: 70px;
 }
 .header-class{
     height: 70px;
     background-color: darkturquoise;
     color: darkturquoise;
-    position: relative;
+    margin-bottom: 3em;
 }
-.main-menu-index{
+.main-menu-index {
     font-size: 30px;
     font-family: math;
     width: 350px;
     height: 350px;
     padding-left: 40%;
+    text-align: center;
+}
+
+.class-form-register {
+    font-size: 30px;
+    font-family: math;
+    width: 350px;
+    height: 350px;
+    padding-left: 40%;
+    text-align: center;
 }

@@ -19,21 +19,29 @@ public class MatchesController extends HttpServlet {
     private final DaoPlayer daoPlayer = new DaoPlayer();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer countPage;
         req.setAttribute("title", "Matches");
+        Integer countPage = finishedMatchesPersistenceService.getCountPageMatches(5);
+        int page;
+        int total = 5;
+        try {
+            page = req.getParameter("page") == null ? 1 : Integer.parseInt(req.getParameter("page"));
+            if (page < 1 || page > countPage) {
+                throw new NumberFormatException();
+            }
+        } catch (NumberFormatException e){
+            resp.sendError(400, "Invalid number page!");
+            return;
+        }
+
         if (req.getRequestURI().matches("/matches") && req.getQueryString() == null){
-            countPage = finishedMatchesPersistenceService.getCountPageMatches(2);
             req.setAttribute("pageSize", countPage);
-            List<Match> matches = finishedMatchesPersistenceService.getMatchStartEndDB(1,2);
+            List<Match> matches = finishedMatchesPersistenceService.getMatchStartEndDB(1,5);
             req.setAttribute("matches", matches);
             req.getRequestDispatcher("/matches.jsp").forward(req, resp);
-        } else if (req.getRequestURI().matches("/matches") && req.getQueryString().matches("page=\\d+")){
-            int page = Integer.parseInt(req.getParameter("page"));
-            countPage = finishedMatchesPersistenceService.getCountPageMatches(2);
-            int total = 2;
+        } else if (req.getRequestURI().matches("/matches") && req.getQueryString().matches("page=\\d+"))
+        {
             List<Match> matches;
-            if (page == 1) {}
-            else {
+            if (page != 1) {
                 page -= 1;
                 page = page*total+1;
             }
@@ -53,12 +61,13 @@ public class MatchesController extends HttpServlet {
                 resp.sendError(404, "Player name not found");
                 return;
             }
-            int page = Integer.parseInt(req.getParameter("page") == null ? String.valueOf(1) : req.getParameter("page"));
-            countPage = finishedMatchesPersistenceService.getCountPageMatchesFilterPlayer(2, player);
+            countPage = finishedMatchesPersistenceService.getCountPageMatchesFilterPlayer(5, player);
+            if (page > countPage){
+                resp.sendError(400, "Invalid number page!");
+                return;
+            }
             List<Match> matches;
-            int total = 2;
-            if (page == 1) {}
-            else {
+            if (page != 1) {
                 page -= 1;
                 page = page*total+1;
             }

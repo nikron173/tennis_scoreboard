@@ -1,6 +1,6 @@
 <%@include file="header.jsp" %>
 <h1>New match tennis!<br></h1>
-<form method="post" action="/new-match">
+<form class="class-form-register" method="post" action="/new-match">
     <label> Player one name:
         <input type="text" name="playerOne" minlength="3">
         <br>
