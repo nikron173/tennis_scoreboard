@@ -1,7 +1,6 @@
 package com.nikron.tennisscoreboard.controllers;
 
 import com.nikron.tennisscoreboard.dao.DaoPlayer;
-import com.nikron.tennisscoreboard.dao.DataMock;
 import com.nikron.tennisscoreboard.model.Match;
 import com.nikron.tennisscoreboard.model.Player;
 import com.nikron.tennisscoreboard.services.FinishedMatchesPersistenceService;

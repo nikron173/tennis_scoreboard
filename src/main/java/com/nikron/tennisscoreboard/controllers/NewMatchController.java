@@ -24,16 +24,25 @@ public class NewMatchController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("playerOne").length() > 3 ||
-                req.getParameter("playerTwo").length() > 3)
-        {
-            if (daoPlayer.findByUsername(req.getParameter("playerOne")).isEmpty()) daoPlayer.save(new Player(req.getParameter("playerOne")));
-            if (daoPlayer.findByUsername(req.getParameter("playerTwo")).isEmpty()) daoPlayer.save(new Player(req.getParameter("playerTwo")));
-            Score match = new Score(daoPlayer.findByUsername(req.getParameter("playerOne")).get(), daoPlayer.findByUsername(req.getParameter("playerTwo")).get());
-            match.setUuid(UUID.randomUUID());
-            OngoingMatchesService.addMatchNotFinished(match.getUuid(), match);
+        String playerOne = req.getParameter("playerOne");
+        String playerTwo = req.getParameter("playerTwo");
 
-            resp.sendRedirect("/match-score?uuid="+match.getUuid());
+        if (playerOne == null || playerTwo == null) {
+            resp.sendError(400, "Invalid player name.");
+            return;
         }
+
+        if (playerOne.isBlank() || playerTwo.isBlank()) {
+            resp.sendError(400, "Invalid player name.");
+            return;
+        }
+
+        if (daoPlayer.findByUsername(playerOne).isEmpty()) daoPlayer.save(new Player(playerOne));
+        if (daoPlayer.findByUsername(playerTwo).isEmpty()) daoPlayer.save(new Player(playerTwo));
+        Score match = new Score(daoPlayer.findByUsername(playerOne).get(), daoPlayer.findByUsername(playerTwo).get());
+        match.setUuid(UUID.randomUUID());
+        OngoingMatchesService.addMatchNotFinished(match.getUuid(), match);
+        resp.sendRedirect("/match-score?uuid="+match.getUuid());
+
     }
 }
