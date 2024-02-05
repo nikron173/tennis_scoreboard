@@ -1,0 +1,19 @@
+package com.nikron.tennis.entity;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.UUID;
+
+
+@Getter
+@Setter
+@Builder
+public class MatchScore {
+    private final UUID id = UUID.randomUUID();
+    private Player firstPlayer;
+    private Player secondPlayer;
+    private Player winnerPlayer;
+    private Score score;
+}

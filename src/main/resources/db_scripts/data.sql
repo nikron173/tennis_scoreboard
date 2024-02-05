@@ -1,0 +1,20 @@
+INSERT INTO players (name) VALUES ( 'Моисеев Никита' );
+INSERT INTO players (name) VALUES ( 'Батаев Владислав' );
+INSERT INTO players (name) VALUES ( 'Лыкин Максим' );
+INSERT INTO players (name) VALUES ( 'Кульгин Владислав' );
+INSERT INTO players (name) VALUES ( 'Семисотнов Роман' );
+INSERT INTO players (name) VALUES ( 'Мизонов Станислав' );
+INSERT INTO players (name) VALUES ( 'Христюк Марк' );
+INSERT INTO players (name) VALUES ( 'Папшев Алексей' );
+INSERT INTO players (name) VALUES ( 'Кривов Илья' );
+INSERT INTO players (name) VALUES ( 'Колодин Никита' );
+
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 1, 2, 1 );
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 2, 3, 3 );
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 4, 3, 3 );
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 5, 6, 5 );
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 7, 3, 3 );
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 9, 7, 7 );
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 1, 9, 1 );
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 10, 4, 4 );
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 8, 2, 2 );
