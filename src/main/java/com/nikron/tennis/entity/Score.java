@@ -4,64 +4,48 @@ import java.util.HashMap;
 
 public class Score {
 
-    private final HashMap<ScoreName, int[]> score = new HashMap<>();
+    private final HashMap<ScoreName, Integer> score = new HashMap<>();
 
     public Score() {
-        score.put(ScoreName.POINT, new int[2]);
-        score.put(ScoreName.GAME, new int[2]);
-        score.put(ScoreName.SET, new int[2]);
+        score.put(ScoreName.POINT, 0);
+        score.put(ScoreName.GAME, 0);
+        score.put(ScoreName.SET, 0);
     }
 
-    public void addPointFirstPlayer(int point) {
-        score.get(ScoreName.POINT)[0] += point;
+    public void addPoint() {
+        score.put(ScoreName.POINT, score.get(ScoreName.POINT) + 1);
     }
 
-    public void addPointSecondPlayer(int point) {
-        score.get(ScoreName.POINT)[1] += point;
+    public void addGame() {
+        score.put(ScoreName.GAME, score.get(ScoreName.GAME) + 1);
     }
 
-    public void addGameFirstPlayer() {
-        score.get(ScoreName.GAME)[0] += 1;
+    public void addSet() {
+        score.put(ScoreName.SET, score.get(ScoreName.SET) + 1);
     }
 
-    public void addGameSecondPlayer() {
-        score.get(ScoreName.GAME)[1] += 1;
+    public int getPoint() {
+        return score.get(ScoreName.POINT);
     }
 
-    public void addSetFirstPlayer() {
-        score.get(ScoreName.SET)[0] += 1;
+    public int getGame() {
+        return score.get(ScoreName.GAME);
     }
 
-    public void addSetSecondPlayer() {
-        score.get(ScoreName.SET)[1] += 1;
+    public int getSet() {
+        return score.get(ScoreName.SET);
     }
 
-    public int getPointFirstPlayer() {
-        return score.get(ScoreName.POINT)[0];
+    public void resetPoint() {
+        score.put(ScoreName.POINT, 0);
     }
 
-    public int getPointSecondPlayer() {
-        return score.get(ScoreName.POINT)[1];
-    }
-
-    public int getGameFirstPlayer() {
-        return score.get(ScoreName.GAME)[0];
-    }
-
-    public int getGameSecondPlayer() {
-        return score.get(ScoreName.GAME)[1];
-    }
-
-    public int getSetFirstPlayer() {
-        return score.get(ScoreName.SET)[0];
-    }
-
-    public int getSetSecondPlayer() {
-        return score.get(ScoreName.SET)[1];
+    public void resetGame() {
+        score.put(ScoreName.GAME, 0);
     }
 
 
-    public enum ScoreName {
+    private enum ScoreName {
         POINT, GAME, SET
     }
 }

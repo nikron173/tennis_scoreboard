@@ -13,6 +13,16 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class MatchRepository implements Repository<UUID, Match> {
+
+    private static final MatchRepository INSTANCE = new MatchRepository();
+
+    private MatchRepository() {
+    }
+
+    public static MatchRepository getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public Optional<Match> findById(UUID id) {
         try (Session session = BuildSessionFactoryUtil.getSession()) {
@@ -45,14 +55,14 @@ public class MatchRepository implements Repository<UUID, Match> {
     @Override
     public void delete(UUID id) {
         Transaction transaction = null;
-        try (Session session = BuildSessionFactoryUtil.getSession()){
+        try (Session session = BuildSessionFactoryUtil.getSession()) {
             transaction = session.beginTransaction();
             session.createQuery("DELETE Match m WHERE m.id = :id", Match.class)
-                            .setParameter("id", id)
-                            .executeUpdate();
+                    .setParameter("id", id)
+                    .executeUpdate();
             transaction.commit();
         } catch (Exception e) {
-            if (Objects.nonNull(transaction)){
+            if (Objects.nonNull(transaction)) {
                 transaction.rollback();
             }
             throw new DatabaseException(e.getMessage(),

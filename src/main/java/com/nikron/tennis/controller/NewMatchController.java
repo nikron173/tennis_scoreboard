@@ -33,7 +33,8 @@ public class NewMatchController extends HttpServlet {
         );
         req.setAttribute("first_player", matchScore.getFirstPlayer());
         req.setAttribute("second_player", matchScore.getSecondPlayer());
-        req.setAttribute("score", matchScore.getScore());
+        req.setAttribute("first_score", matchScore.getFirstPlayerScore());
+        req.setAttribute("second_score", matchScore.getSecondPlayerScore());
         req.getRequestDispatcher(String.format("/match-score?uuid=%s", matchScore.getId()))
                 .forward(req, resp);
     }

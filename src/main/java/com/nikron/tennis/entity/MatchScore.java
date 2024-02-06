@@ -15,5 +15,6 @@ public class MatchScore {
     private Player firstPlayer;
     private Player secondPlayer;
     private Player winnerPlayer;
-    private Score score;
+    private final Score firstPlayerScore = new Score();
+    private final Score secondPlayerScore = new Score();
 }
