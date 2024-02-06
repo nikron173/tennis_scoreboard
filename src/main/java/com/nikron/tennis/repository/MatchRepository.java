@@ -1,11 +1,13 @@
 package com.nikron.tennis.repository;
 
 import com.nikron.tennis.entity.Match;
+import com.nikron.tennis.entity.Player;
 import com.nikron.tennis.exception.DatabaseException;
 import com.nikron.tennis.util.BuildSessionFactoryUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 import java.util.Objects;
@@ -52,6 +54,72 @@ public class MatchRepository implements Repository<UUID, Match> {
         }
     }
 
+    public List<Match> findMatchByPlayerNamePageSize(int pageSize, String playerName, int page) {
+        try (Session session = BuildSessionFactoryUtil.getSession()) {
+            session.beginTransaction();
+            Query<Match> selectQuery = session
+                    .createQuery("FROM Match m" +
+                    " WHERE m.firstPlayer.name = :playerName" +
+                    " OR m.secondPlayer.name = :playerName", Match.class)
+                            .setParameter("playerName", playerName);
+            selectQuery.setFirstResult(page-1);
+            selectQuery.setMaxResults(pageSize);
+            List<Match> matches = selectQuery.getResultList();
+            session.getTransaction().commit();
+            return matches;
+        } catch (Exception e) {
+            throw new DatabaseException(e.getMessage(),
+                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public Integer lastPageNumberPlayerName(int pageSize, String playerName){
+        try (Session session = BuildSessionFactoryUtil.getSession()) {
+            session.beginTransaction();
+            Long countRecords = session
+                    .createQuery("SELECT count(m.id) FROM Match m" +
+                            " WHERE m.firstPlayer.name = :playerName" +
+                            " OR m.secondPlayer.name = :playerName", Long.class)
+                    .setParameter("playerName", playerName)
+                    .uniqueResult();
+            Integer lastPageNumber = (int) (Math.ceil(countRecords / pageSize));
+            session.getTransaction().commit();
+            return lastPageNumber;
+        } catch (Exception e) {
+            throw new DatabaseException(e.getMessage(),
+                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public List<Match> findMatchPageSize(int pageSize, int page) {
+        try (Session session = BuildSessionFactoryUtil.getSession()) {
+            session.beginTransaction();
+            Query<Match> selectQuery = session.createQuery("FROM Match", Match.class);
+            selectQuery.setFirstResult(page-1);
+            selectQuery.setMaxResults(pageSize);
+            List<Match> matches = selectQuery.getResultList();
+            session.getTransaction().commit();
+            return matches;
+        } catch (Exception e) {
+            throw new DatabaseException(e.getMessage(),
+                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public Integer lastPageNumber(int pageSize){
+        try (Session session = BuildSessionFactoryUtil.getSession()) {
+            session.beginTransaction();
+            Long countRecords = session
+                    .createQuery("SELECT count(id) FROM Match", Long.class)
+                    .uniqueResult();
+            Integer lastPageNumber = (int) (Math.ceil(countRecords / pageSize));
+            session.getTransaction().commit();
+            return lastPageNumber;
+        } catch (Exception e) {
+            throw new DatabaseException(e.getMessage(),
+                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
     @Override
     public void delete(UUID id) {
         Transaction transaction = null;
