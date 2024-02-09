@@ -8,6 +8,7 @@ import com.nikron.tennis.mapper.PlayerMapper;
 import com.nikron.tennis.repository.PlayerRepository;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.util.List;
 import java.util.Optional;
 
 public class PlayerService {
@@ -31,6 +32,10 @@ public class PlayerService {
         }
         throw new NotFoundResourceException("Игрок с id " + id + " не найден",
                 HttpServletResponse.SC_NOT_FOUND);
+    }
+
+    public List<PlayerDto> findAll() {
+        return playerRepository.findAll().stream().map(playerMapper::convertToDto).toList();
     }
 
     public PlayerDto findByName(String name) {

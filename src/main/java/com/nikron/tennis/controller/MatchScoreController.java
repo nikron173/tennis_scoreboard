@@ -2,6 +2,7 @@ package com.nikron.tennis.controller;
 
 import com.nikron.tennis.entity.MatchScore;
 import com.nikron.tennis.service.MatchScoreService;
+import com.nikron.tennis.util.JspPath;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,7 +25,7 @@ public class MatchScoreController extends HttpServlet {
         req.setAttribute("second_player", matchScore.getSecondPlayer());
         req.setAttribute("first_score", matchScore.getFirstPlayerScore());
         req.setAttribute("second_score", matchScore.getSecondPlayerScore());
-        req.getRequestDispatcher("match-score.jsp").forward(req, resp);
+        req.getRequestDispatcher(JspPath.getPathJsp("match-score")).forward(req, resp);
     }
 
     @Override

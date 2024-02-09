@@ -21,13 +21,14 @@ public class ApplicationFilter extends HttpFilter {
         HttpServletResponse response = (HttpServletResponse) res;
         request.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-
+        if (request.getRequestURI().equals("/")) {
+            request.getRequestDispatcher("/jsp/main-menu.jsp").forward(request, response);
+            return;
+        }
         try {
             chain.doFilter(request, response);
         } catch (ApplicationException e) {
             System.out.println(e);
         }
-
-
     }
 }

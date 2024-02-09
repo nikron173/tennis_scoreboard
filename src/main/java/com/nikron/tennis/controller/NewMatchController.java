@@ -3,6 +3,7 @@ package com.nikron.tennis.controller;
 import com.nikron.tennis.dto.PlayerDto;
 import com.nikron.tennis.entity.MatchScore;
 import com.nikron.tennis.service.MatchScoreService;
+import com.nikron.tennis.util.JspPath;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +19,8 @@ public class NewMatchController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("new-match.jsp");
+
+        req.getRequestDispatcher(JspPath.getPathJsp("new-match")).forward(req, resp);
     }
 
     @Override

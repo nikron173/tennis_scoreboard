@@ -2,6 +2,7 @@ package com.nikron.tennis.controller;
 
 import com.nikron.tennis.dto.MatchDto;
 import com.nikron.tennis.service.MatchService;
+import com.nikron.tennis.util.JspPath;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -42,7 +43,7 @@ public class MatchesController extends HttpServlet {
             req.setAttribute("match", dto);
             req.setAttribute("countPage", countPage);
         }
-        req.getRequestDispatcher("matches.jsp")
+        req.getRequestDispatcher(JspPath.getPathJsp("matches"))
                 .forward(req, resp);
     }
 }
