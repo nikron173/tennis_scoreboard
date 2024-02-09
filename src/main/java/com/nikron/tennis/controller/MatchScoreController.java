@@ -21,6 +21,7 @@ public class MatchScoreController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UUID id = UUID.fromString(req.getParameter("uuid"));
         MatchScore matchScore = scoreService.findById(id);
+        req.setAttribute("uuid", id);
         req.setAttribute("first_player", matchScore.getFirstPlayer());
         req.setAttribute("second_player", matchScore.getSecondPlayer());
         req.setAttribute("first_score", matchScore.getFirstPlayerScore());
@@ -38,9 +39,10 @@ public class MatchScoreController extends HttpServlet {
         }
         if (Objects.nonNull(matchScore.getWinnerPlayer())) {
             req.getRequestDispatcher("/matches").forward(req, resp);
+            System.out.println(matchScore.getWinnerPlayer());
             return;
         }
-        req.getRequestDispatcher(String.format("/match-score?uuid=%s", matchScore.getId()))
-                .forward(req, resp);
+        System.out.println(matchScore.getId());
+        resp.sendRedirect(String.format("/match-score?uuid=%s", matchScore.getId()));
     }
 }

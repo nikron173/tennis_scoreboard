@@ -1,6 +1,7 @@
 package com.nikron.tennis.controller;
 
 import com.nikron.tennis.service.PlayerService;
+import com.nikron.tennis.util.JspPath;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +16,6 @@ public class MainMenuController extends HttpServlet {
     private final PlayerService service = PlayerService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/jsp/main-menu.jsp").forward(req, resp);
+        req.getRequestDispatcher(JspPath.getPathJsp("main-menu")).forward(req, resp);
     }
 }

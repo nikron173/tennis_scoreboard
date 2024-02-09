@@ -1,5 +1,6 @@
 package com.nikron.tennis.entity;
 
+import com.nikron.tennis.dto.PlayerDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

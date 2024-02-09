@@ -19,7 +19,6 @@ public class NewMatchController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         req.getRequestDispatcher(JspPath.getPathJsp("new-match")).forward(req, resp);
     }
 
@@ -33,11 +32,12 @@ public class NewMatchController extends HttpServlet {
                         .name(req.getParameter("second_player"))
                         .build()
         );
-        req.setAttribute("first_player", matchScore.getFirstPlayer());
-        req.setAttribute("second_player", matchScore.getSecondPlayer());
-        req.setAttribute("first_score", matchScore.getFirstPlayerScore());
-        req.setAttribute("second_score", matchScore.getSecondPlayerScore());
-        req.getRequestDispatcher(String.format("/match-score?uuid=%s", matchScore.getId()))
-                .forward(req, resp);
+//        req.setAttribute("first_player", matchScore.getFirstPlayer());
+//        req.setAttribute("second_player", matchScore.getSecondPlayer());
+//        req.setAttribute("first_score", matchScore.getFirstPlayerScore());
+//        req.setAttribute("second_score", matchScore.getSecondPlayerScore());
+//        req.getRequestDispatcher(String.format("/match-score?uuid=%s", matchScore.getId()))
+//                .forward(req, resp);
+        resp.sendRedirect(String.format("/match-score?uuid=%s", matchScore.getId()));
     }
 }

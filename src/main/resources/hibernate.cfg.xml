@@ -7,6 +7,7 @@
     <property name="connection.url">jdbc:h2:mem:tennis_scoreboard?</property>
     <property name="connection.driver_class">org.h2.Driver</property>
     <property name="hbm2ddl.auto">create</property>
+    <property name="hibernate.connection.characterEncoding">utf8</property>
     <property name="dialect">org.hibernate.dialect.H2Dialect</property>
     <property name="connection.username">sa</property>
     <property name="format_sql">true</property>

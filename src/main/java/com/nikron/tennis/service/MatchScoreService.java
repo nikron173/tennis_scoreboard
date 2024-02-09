@@ -98,7 +98,7 @@ public class MatchScoreService {
     }
 
     private boolean checkWinGame(Score scoreOne, Score scoreTwo) {
-        return scoreOne.getPoint() >= 3 &&
+        return scoreOne.getPoint() >= 4 &&
                 Math.abs(scoreOne.getPoint() - scoreTwo.getPoint()) >= 2 &&
                 scoreOne.getPoint() > scoreTwo.getPoint();
     }

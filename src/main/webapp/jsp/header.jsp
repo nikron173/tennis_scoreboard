@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsp/css/style.css"/>
-    <title>Главная</title>
+    <title>${requestScope.title}</title>
 </head>
 <body>
 <!-- HEADER -->
