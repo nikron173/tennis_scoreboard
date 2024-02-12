@@ -1,8 +1,11 @@
 package com.nikron.tennis.controller;
 
 import com.nikron.tennis.dto.MatchDto;
+import com.nikron.tennis.exception.BadRequestException;
+import com.nikron.tennis.exception.NotFoundResourceException;
 import com.nikron.tennis.service.MatchService;
 import com.nikron.tennis.util.JspPath;
+import com.nikron.tennis.util.ValidParameter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,28 +23,26 @@ public class MatchesController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (Objects.nonNull(req.getParameter("page")) &&
-                Objects.nonNull(req.getParameter("filter_by_player_name"))) {
-            List<MatchDto> matches = matchService.findByPlayerName(
-                    req.getParameter("filter_by_player_name"),
-                    Integer.parseInt(req.getParameter("page"))
-            );
+        int page = Objects.isNull(req.getParameter("page")) ? 1 : ValidParameter.getNumber(req, "page");
+        if (page <= 0) throw new BadRequestException("Номер страницы не может быть отрицательным число или нулем.",
+                HttpServletResponse.SC_BAD_REQUEST);
+        if (Objects.nonNull(req.getParameter("filter_by_player_name"))) {
             int countPage = matchService
                     .lastPageSizeByPlayerName(req.getParameter("filter_by_player_name"));
-            req.setAttribute("matches", matches);
-            req.setAttribute("countPage", countPage);
-        } else if (Objects.nonNull(req.getParameter("filter_by_player_name"))) {
+            System.out.println("Количество страниц - " + countPage);
+            if (page > countPage) {
+                throw new NotFoundResourceException("Ресурс не найден", HttpServletResponse.SC_NOT_FOUND);
+            }
             List<MatchDto> matches = matchService.findByPlayerName(
-                    req.getParameter("filter_by_player_name"), 1);
-            int countPage = matchService
-                    .lastPageSizeByPlayerName(req.getParameter("filter_by_player_name"));
+                    req.getParameter("filter_by_player_name"), page);
             req.setAttribute("matches", matches);
             req.setAttribute("countPage", countPage);
         } else {
-            int page = Objects.nonNull(req.getParameter("page")) ?
-                    Integer.parseInt(req.getParameter("page")) : 1;
-            List<MatchDto> matches = matchService.findAllByPage(page);
             int countPage = matchService.lastPageSize();
+            if (page > countPage) {
+                throw new NotFoundResourceException("Ресурс не найден", HttpServletResponse.SC_NOT_FOUND);
+            }
+            List<MatchDto> matches = matchService.findAllByPage(page);
             req.setAttribute("matches", matches);
             req.setAttribute("countPage", countPage);
         }

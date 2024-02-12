@@ -12,6 +12,7 @@ import com.nikron.tennis.repository.MatchScoreRepository;
 import com.nikron.tennis.repository.PlayerRepository;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -119,5 +120,9 @@ public class MatchScoreService {
     private void resetGame(MatchScore matchScore) {
         matchScore.getFirstPlayerScore().resetGame();
         matchScore.getSecondPlayerScore().resetGame();
+    }
+
+    public Map<UUID, MatchScore> findAll() {
+        return scoreRepository.getMatches();
     }
 }

@@ -1,13 +1,13 @@
-INSERT INTO players (name) VALUES ( 'Моисеев Никита' );
-INSERT INTO players (name) VALUES ( 'Батаев Владислав' );
-INSERT INTO players (name) VALUES ( 'Лыкин Максим' );
-INSERT INTO players (name) VALUES ( 'Кульгин Владислав' );
-INSERT INTO players (name) VALUES ( 'Семисотнов Роман' );
-INSERT INTO players (name) VALUES ( 'Мизонов Станислав' );
-INSERT INTO players (name) VALUES ( 'Христюк Марк' );
-INSERT INTO players (name) VALUES ( 'Папшев Алексей' );
-INSERT INTO players (name) VALUES ( 'Кривов Илья' );
-INSERT INTO players (name) VALUES ( 'Колодин Никита' );
+INSERT INTO players (name) VALUES ( 'Moiseev Nikita' );
+INSERT INTO players (name) VALUES ( 'Bataev Vladislav' );
+INSERT INTO players (name) VALUES ( 'Lykin Maksim' );
+INSERT INTO players (name) VALUES ( 'Kulgin Vladislav' );
+INSERT INTO players (name) VALUES ( 'Semisotnov Roman' );
+INSERT INTO players (name) VALUES ( 'Mizonov Stanislav' );
+INSERT INTO players (name) VALUES ( 'Khrystyk Mark' );
+INSERT INTO players (name) VALUES ( 'Papshev Alex' );
+INSERT INTO players (name) VALUES ( 'Krivov Ilya' );
+INSERT INTO players (name) VALUES ( 'Kolodin Nikita' );
 
 INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 1, 2, 1 );
 INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 2, 3, 3 );

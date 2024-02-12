@@ -42,7 +42,6 @@ public class MatchScoreController extends HttpServlet {
             resp.sendRedirect("/matches");
             return;
         }
-        System.out.println(matchScore.getId());
         resp.sendRedirect(String.format("/match-score?uuid=%s", matchScore.getId()));
     }
 }

@@ -22,6 +22,7 @@
                     <a class="nav-item" href="${pageContext.request.contextPath}/">Главная</a>
                     <a class="nav-item" href="${pageContext.request.contextPath}/new-match">Новый матч</a>
                     <a class="nav-item" href="${pageContext.request.contextPath}/matches">Завершенные матчи</a>
+                    <a class="nav-item" href="${pageContext.request.contextPath}/unfinished-matches">Не завершенные матчи</a>
                 </div>
             </div>
 

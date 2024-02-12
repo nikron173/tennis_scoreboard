@@ -62,7 +62,7 @@ public class MatchRepository implements Repository<Long, Match> {
                     " WHERE m.firstPlayer.name = :playerName" +
                     " OR m.secondPlayer.name = :playerName", Match.class)
                             .setParameter("playerName", playerName);
-            selectQuery.setFirstResult(page-1);
+            selectQuery.setFirstResult((page-1)*pageSize);
             selectQuery.setMaxResults(pageSize);
             List<Match> matches = selectQuery.getResultList();
             session.getTransaction().commit();
@@ -95,7 +95,7 @@ public class MatchRepository implements Repository<Long, Match> {
         try (Session session = BuildSessionFactoryUtil.getSession()) {
             session.beginTransaction();
             Query<Match> selectQuery = session.createQuery("FROM Match", Match.class);
-            selectQuery.setFirstResult(page-1);
+            selectQuery.setFirstResult((page-1) * pageSize);
             selectQuery.setMaxResults(pageSize);
             List<Match> matches = selectQuery.getResultList();
             session.getTransaction().commit();
