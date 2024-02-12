@@ -38,8 +38,8 @@ public class MatchScoreController extends HttpServlet {
             matchScore = scoreService.game(UUID.fromString(req.getParameter("uuid")), req.getParameter("second_player"));
         }
         if (Objects.nonNull(matchScore.getWinnerPlayer())) {
-            req.getRequestDispatcher("/matches").forward(req, resp);
-            System.out.println(matchScore.getWinnerPlayer());
+            //req.getRequestDispatcher("/matches").forward(req, resp);
+            resp.sendRedirect("/matches");
             return;
         }
         System.out.println(matchScore.getId());

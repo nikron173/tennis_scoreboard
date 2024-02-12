@@ -22,6 +22,9 @@
                 </tr>
             </c:forEach>
         </table>
+        <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
+            <a href="/matches?page=${num}">${num}</a>
+        </c:forEach>
     </div>
 </div>
 

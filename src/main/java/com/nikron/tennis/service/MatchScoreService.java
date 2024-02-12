@@ -11,7 +11,6 @@ import com.nikron.tennis.repository.MatchRepository;
 import com.nikron.tennis.repository.MatchScoreRepository;
 import com.nikron.tennis.repository.PlayerRepository;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.transaction.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -86,7 +85,6 @@ public class MatchScoreService {
         }
         if (checkWin(one)) {
             Match match = Match.builder()
-                    .id(matchScore.getId())
                     .firstPlayer(matchScore.getFirstPlayer())
                     .secondPlayer(matchScore.getSecondPlayer())
                     .winnerPlayer(matchScore.getFirstPlayer())

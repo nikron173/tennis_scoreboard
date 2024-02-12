@@ -38,7 +38,9 @@ public class MatchesController extends HttpServlet {
             req.setAttribute("matches", matches);
             req.setAttribute("countPage", countPage);
         } else {
-            List<MatchDto> matches = matchService.findAll();
+            int page = Objects.nonNull(req.getParameter("page")) ?
+                    Integer.parseInt(req.getParameter("page")) : 1;
+            List<MatchDto> matches = matchService.findAllByPage(page);
             int countPage = matchService.lastPageSize();
             req.setAttribute("matches", matches);
             req.setAttribute("countPage", countPage);

@@ -2,7 +2,6 @@ package com.nikron.tennis.service;
 
 import com.nikron.tennis.dto.MatchDto;
 import com.nikron.tennis.entity.Match;
-import com.nikron.tennis.entity.Player;
 import com.nikron.tennis.exception.NotFoundResourceException;
 import com.nikron.tennis.mapper.MatchMapper;
 import com.nikron.tennis.repository.MatchRepository;
@@ -41,7 +40,7 @@ public class MatchService {
                 .toList();
     }
 
-    public MatchDto findById(UUID id) {
+    public MatchDto findById(Long id) {
         Optional<Match> match = matchRepository.findById(id);
         if (match.isPresent()) {
             return matchMapper.convertToDto(match.get());
@@ -52,6 +51,11 @@ public class MatchService {
 
     public List<MatchDto> findByPlayerName(String playerName, int page) {
         return matchRepository.findMatchByPlayerNamePageSize(pageSize, playerName, page)
+                .stream().map(matchMapper::convertToDto).toList();
+    }
+
+    public List<MatchDto> findAllByPage(int page) {
+        return matchRepository.findMatchPageSize(pageSize, page)
                 .stream().map(matchMapper::convertToDto).toList();
     }
 }

@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MatchDto {
-    private UUID matchId;
+    private Long matchId;
     private Long firstPlayerId;
     private String firstPlayerName;
     private Long secondPlayerId;

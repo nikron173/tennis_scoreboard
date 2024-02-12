@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-public class MatchRepository implements Repository<UUID, Match> {
+public class MatchRepository implements Repository<Long, Match> {
 
     private static final MatchRepository INSTANCE = new MatchRepository();
 
@@ -26,7 +26,7 @@ public class MatchRepository implements Repository<UUID, Match> {
     }
 
     @Override
-    public Optional<Match> findById(UUID id) {
+    public Optional<Match> findById(Long id) {
         try (Session session = BuildSessionFactoryUtil.getSession()) {
             session.beginTransaction();
             Optional<Match> match = Optional.of(session.get(Match.class, id));
@@ -121,7 +121,7 @@ public class MatchRepository implements Repository<UUID, Match> {
         }
     }
     @Override
-    public void delete(UUID id) {
+    public void delete(Long id) {
         Transaction transaction = null;
         try (Session session = BuildSessionFactoryUtil.getSession()) {
             transaction = session.beginTransaction();
@@ -139,7 +139,7 @@ public class MatchRepository implements Repository<UUID, Match> {
     }
 
     @Override
-    public Match update(UUID id, Match match) {
+    public Match update(Long id, Match match) {
         return null;
     }
 
@@ -149,6 +149,7 @@ public class MatchRepository implements Repository<UUID, Match> {
         try (Session session = BuildSessionFactoryUtil.getSession()) {
             transaction = session.beginTransaction();
             session.persist(match);
+            session.flush();
             transaction.commit();
             return match;
         } catch (Exception e) {
