@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/player")
+//@WebServlet(urlPatterns = "/player")
 public class PlayerController extends HttpServlet {
 
     private final PlayerService playerService = PlayerService.getInstance();

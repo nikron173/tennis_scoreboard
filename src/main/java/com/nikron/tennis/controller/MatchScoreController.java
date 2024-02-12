@@ -3,6 +3,7 @@ package com.nikron.tennis.controller;
 import com.nikron.tennis.entity.MatchScore;
 import com.nikron.tennis.service.MatchScoreService;
 import com.nikron.tennis.util.JspPath;
+import com.nikron.tennis.util.ViewPointPlayerUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,10 +23,20 @@ public class MatchScoreController extends HttpServlet {
         UUID id = UUID.fromString(req.getParameter("uuid"));
         MatchScore matchScore = scoreService.findById(id);
         req.setAttribute("uuid", id);
-        req.setAttribute("first_player", matchScore.getFirstPlayer());
-        req.setAttribute("second_player", matchScore.getSecondPlayer());
-        req.setAttribute("first_score", matchScore.getFirstPlayerScore());
-        req.setAttribute("second_score", matchScore.getSecondPlayerScore());
+        req.setAttribute("firstPlayer", matchScore.getFirstPlayer());
+        req.setAttribute("secondPlayer", matchScore.getSecondPlayer());
+        req.setAttribute("firstScore", matchScore.getFirstPlayerScore());
+        req.setAttribute("secondScore", matchScore.getSecondPlayerScore());
+        req.setAttribute("firstPlayerViewPoint",
+                ViewPointPlayerUtil.viewPoint(
+                        matchScore.getFirstPlayerScore().getPoint(),
+                        matchScore.getSecondPlayerScore().getPoint())
+        );
+        req.setAttribute("secondPlayerViewPoint",
+                ViewPointPlayerUtil.viewPoint(
+                        matchScore.getSecondPlayerScore().getPoint(),
+                        matchScore.getFirstPlayerScore().getPoint())
+        );
         req.getRequestDispatcher(JspPath.getPathJsp("match-score")).forward(req, resp);
     }
 

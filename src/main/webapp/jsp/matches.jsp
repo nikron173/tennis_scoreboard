@@ -6,6 +6,12 @@
 
 <div class="container-menu">
     <div class="container-table">
+        <div class="find_player">
+            <form action="${pageContext.request.contextPath}/matches" method="get">
+                <input type="text" placeholder="Поиск игрока" name="filter_by_player_name">
+                <button type="submit" class="btn">Поиск</button>
+            </form>
+        </div>
         <table>
             <tr>
                 <th>Id матча</th>
@@ -22,9 +28,21 @@
                 </tr>
             </c:forEach>
         </table>
-        <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
-            <a href="/matches?page=${num}">${num}</a>
-        </c:forEach>
+
+        <c:choose>
+           <c:when test="${not empty requestScope.filterPlayerName}">
+               <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
+                   <a href="/matches?page=${num}&filter_by_player_name=${requestScope.filterPlayerName}">${num}</a>
+               </c:forEach>
+            </c:when>
+            <c:when test="${empty requestScope.filterPlayerName}">
+                <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
+                    <a href="/matches?page=${num}">${num}</a>
+                </c:forEach>
+            </c:when>
+        </c:choose>
+
+
     </div>
 </div>
 

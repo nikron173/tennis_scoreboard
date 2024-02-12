@@ -4,6 +4,7 @@ import com.nikron.tennis.dto.PlayerDto;
 import com.nikron.tennis.entity.MatchScore;
 import com.nikron.tennis.service.MatchScoreService;
 import com.nikron.tennis.util.JspPath;
+import com.nikron.tennis.util.ValidParameter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,12 +25,14 @@ public class NewMatchController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String firstPlayerName = ValidParameter.getValidPlayerName(req, "first_player");
+        String secondPlayerName = ValidParameter.getValidPlayerName(req, "second_player");
         MatchScore matchScore = scoreService.create(
                 PlayerDto.builder()
-                        .name(req.getParameter("first_player"))
+                        .name(firstPlayerName)
                         .build(),
                 PlayerDto.builder()
-                        .name(req.getParameter("second_player"))
+                        .name(secondPlayerName)
                         .build()
         );
         resp.sendRedirect(String.format("/match-score?uuid=%s", matchScore.getId()));

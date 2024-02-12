@@ -31,7 +31,6 @@ public class PlayerRepository implements Repository<Long, Player> {
             session.getTransaction().commit();
             return player;
         } catch (Exception e) {
-            e.printStackTrace();
             throw new DatabaseException(e.getMessage(),
                     HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
@@ -71,7 +70,9 @@ public class PlayerRepository implements Repository<Long, Player> {
     @Override
     public void delete(Long id) {
         Transaction transaction = null;
-        try (Session session = BuildSessionFactoryUtil.getSession()) {
+        Session session = null;
+        try {
+            session = BuildSessionFactoryUtil.getSession();
             transaction = session.beginTransaction();
             session.createQuery("DELETE Player p WHERE p.id = :id", Player.class)
                     .setParameter("id", id)
@@ -83,19 +84,25 @@ public class PlayerRepository implements Repository<Long, Player> {
             }
             throw new DatabaseException(e.getMessage(),
                     HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } finally {
+            if (Objects.nonNull(session) && session.isOpen()) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Player update(Long id, Player player) {
         Transaction transaction = null;
-        try (Session session = BuildSessionFactoryUtil.getSession()) {
+        Session session = null;
+        try {
+            session = BuildSessionFactoryUtil.getSession();
             transaction = session.beginTransaction();
             Player playerDb = session.find(Player.class, id);
-            if (findByName(player.getName()).isPresent()) {
-                throw new DuplicateResourceException("Имя \"%s\" уже занято".formatted(player.getName()),
-                        HttpServletResponse.SC_CONFLICT);
-            }
+//            if (findByName(player.getName()).isPresent()) {
+//                throw new DuplicateResourceException("Имя \"%s\" уже занято".formatted(player.getName()),
+//                        HttpServletResponse.SC_CONFLICT);
+//            }
             playerDb.setName(player.getName());
             transaction.commit();
             return playerDb;
@@ -105,13 +112,19 @@ public class PlayerRepository implements Repository<Long, Player> {
             }
             throw new DatabaseException(e.getMessage(),
                     HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } finally {
+            if (Objects.nonNull(session) && session.isOpen()) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Player save(Player player) {
         Transaction transaction = null;
-        try (Session session = BuildSessionFactoryUtil.getSession()) {
+        Session session = null;
+        try {
+            session = BuildSessionFactoryUtil.getSession();
             transaction = session.beginTransaction();
             session.persist(player);
             transaction.commit();
@@ -122,6 +135,10 @@ public class PlayerRepository implements Repository<Long, Player> {
             }
             throw new DatabaseException(e.getMessage(),
                     HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } finally {
+            if (Objects.nonNull(session) && session.isOpen()) {
+                session.close();
+            }
         }
     }
 }

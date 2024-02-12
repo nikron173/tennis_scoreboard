@@ -5,6 +5,7 @@ import com.nikron.tennis.entity.Match;
 import com.nikron.tennis.entity.MatchScore;
 import com.nikron.tennis.entity.Player;
 import com.nikron.tennis.entity.Score;
+import com.nikron.tennis.exception.BadRequestException;
 import com.nikron.tennis.exception.NotFoundResourceException;
 import com.nikron.tennis.mapper.PlayerMapper;
 import com.nikron.tennis.repository.MatchRepository;
@@ -37,9 +38,16 @@ public class MatchScoreService {
     public MatchScore create(PlayerDto firstPlayer, PlayerDto secondPlayer) {
         Optional<Player> firstOption = playerRepository.findByName(firstPlayer.getName());
         Optional<Player> secondOption = playerRepository.findByName(secondPlayer.getName());
-        Player first = firstOption.orElseGet(() -> playerRepository.save(playerMapper.convertToEntity(firstPlayer)));
-        Player second = secondOption.orElseGet(() -> playerRepository.save(playerMapper.convertToEntity(secondPlayer)));
-
+        Player first = firstOption.orElseGet(
+                () -> playerRepository.save(playerMapper.convertToEntity(firstPlayer))
+        );
+        Player second = secondOption.orElseGet(
+                () -> playerRepository.save(playerMapper.convertToEntity(secondPlayer))
+        );
+        if (first.getId().equals(second.getId())) {
+            throw new BadRequestException("Матч не может состоять с одним и тем же участником",
+                    HttpServletResponse.SC_BAD_REQUEST);
+        }
         return scoreRepository.save(MatchScore.builder()
                 .firstPlayer(first)
                 .secondPlayer(second)
@@ -67,14 +75,22 @@ public class MatchScoreService {
     public MatchScore game(UUID id, String player) {
         MatchScore matchScore = findById(id);
         if ("first_player".equals(player)) {
-            step(matchScore, matchScore.getFirstPlayerScore(), matchScore.getSecondPlayerScore());
+            step(matchScore,
+                    matchScore.getFirstPlayerScore(),
+                    matchScore.getSecondPlayerScore(),
+                    player
+            );
         } else {
-            step(matchScore, matchScore.getSecondPlayerScore(), matchScore.getFirstPlayerScore());
+            step(matchScore,
+                    matchScore.getSecondPlayerScore(),
+                    matchScore.getFirstPlayerScore(),
+                    player
+            );
         }
         return matchScore;
     }
 
-    private void step(MatchScore matchScore, Score one, Score two) {
+    private void step(MatchScore matchScore, Score one, Score two, String player) {
         one.addPoint();
         if (checkWinGame(one, two)) {
             one.addGame();
@@ -85,14 +101,15 @@ public class MatchScoreService {
             resetGame(matchScore);
         }
         if (checkWin(one)) {
+            matchScore.setWinnerPlayer(player.equals("first_player") ?
+                    matchScore.getFirstPlayer() : matchScore.getSecondPlayer());
             Match match = Match.builder()
                     .firstPlayer(matchScore.getFirstPlayer())
                     .secondPlayer(matchScore.getSecondPlayer())
-                    .winnerPlayer(matchScore.getFirstPlayer())
+                    .winnerPlayer(matchScore.getWinnerPlayer())
                     .build();
             matchRepository.save(match);
             delete(matchScore.getId());
-            matchScore.setWinnerPlayer(matchScore.getFirstPlayer());
         }
     }
 

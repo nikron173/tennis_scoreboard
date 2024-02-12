@@ -37,6 +37,7 @@ public class MatchesController extends HttpServlet {
                     req.getParameter("filter_by_player_name"), page);
             req.setAttribute("matches", matches);
             req.setAttribute("countPage", countPage);
+            req.setAttribute("filterPlayerName", req.getParameter("filter_by_player_name"));
         } else {
             int countPage = matchService.lastPageSize();
             if (page > countPage) {

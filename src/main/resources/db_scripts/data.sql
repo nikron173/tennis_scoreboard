@@ -18,3 +18,4 @@ INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES
 INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 1, 9, 1 );
 INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 10, 4, 4 );
 INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 8, 2, 2 );
+INSERT INTO matches (first_player_id, second_player_id, winner_player_id) VALUES ( 9, 2, 9 );

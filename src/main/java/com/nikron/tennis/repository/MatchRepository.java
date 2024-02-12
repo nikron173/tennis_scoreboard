@@ -1,7 +1,6 @@
 package com.nikron.tennis.repository;
 
 import com.nikron.tennis.entity.Match;
-import com.nikron.tennis.entity.Player;
 import com.nikron.tennis.exception.DatabaseException;
 import com.nikron.tennis.util.BuildSessionFactoryUtil;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,7 +11,6 @@ import org.hibernate.query.Query;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.UUID;
 
 public class MatchRepository implements Repository<Long, Match> {
 
@@ -59,10 +57,10 @@ public class MatchRepository implements Repository<Long, Match> {
             session.beginTransaction();
             Query<Match> selectQuery = session
                     .createQuery("FROM Match m" +
-                    " WHERE m.firstPlayer.name = :playerName" +
-                    " OR m.secondPlayer.name = :playerName", Match.class)
-                            .setParameter("playerName", playerName);
-            selectQuery.setFirstResult((page-1)*pageSize);
+                            " WHERE m.firstPlayer.name = :playerName" +
+                            " OR m.secondPlayer.name = :playerName", Match.class)
+                    .setParameter("playerName", playerName);
+            selectQuery.setFirstResult((page - 1) * pageSize);
             selectQuery.setMaxResults(pageSize);
             List<Match> matches = selectQuery.getResultList();
             session.getTransaction().commit();
@@ -73,7 +71,7 @@ public class MatchRepository implements Repository<Long, Match> {
         }
     }
 
-    public Integer lastPageNumberPlayerName(int pageSize, String playerName){
+    public Integer lastPageNumberPlayerName(int pageSize, String playerName) {
         try (Session session = BuildSessionFactoryUtil.getSession()) {
             session.beginTransaction();
             Long countRecords = session
@@ -82,7 +80,7 @@ public class MatchRepository implements Repository<Long, Match> {
                             " OR m.secondPlayer.name = :playerName", Long.class)
                     .setParameter("playerName", playerName)
                     .uniqueResult();
-            Integer lastPageNumber = (int) (Math.ceil(countRecords / pageSize));
+            Integer lastPageNumber = (int) (Math.ceil(countRecords * 1.0 / pageSize));
             session.getTransaction().commit();
             return lastPageNumber;
         } catch (Exception e) {
@@ -95,7 +93,7 @@ public class MatchRepository implements Repository<Long, Match> {
         try (Session session = BuildSessionFactoryUtil.getSession()) {
             session.beginTransaction();
             Query<Match> selectQuery = session.createQuery("FROM Match", Match.class);
-            selectQuery.setFirstResult((page-1) * pageSize);
+            selectQuery.setFirstResult((page - 1) * pageSize);
             selectQuery.setMaxResults(pageSize);
             List<Match> matches = selectQuery.getResultList();
             session.getTransaction().commit();
@@ -106,13 +104,13 @@ public class MatchRepository implements Repository<Long, Match> {
         }
     }
 
-    public Integer lastPageNumber(int pageSize){
+    public Integer lastPageNumber(int pageSize) {
         try (Session session = BuildSessionFactoryUtil.getSession()) {
             session.beginTransaction();
             Long countRecords = session
-                    .createQuery("SELECT count(id) FROM Match", Long.class)
+                    .createQuery("SELECT count(m.id) FROM Match m", Long.class)
                     .uniqueResult();
-            Integer lastPageNumber = (int) (Math.ceil(countRecords / pageSize));
+            Integer lastPageNumber = (int) (Math.ceil(countRecords * 1.0 / pageSize));
             session.getTransaction().commit();
             return lastPageNumber;
         } catch (Exception e) {
@@ -120,10 +118,13 @@ public class MatchRepository implements Repository<Long, Match> {
                     HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+
     @Override
     public void delete(Long id) {
         Transaction transaction = null;
-        try (Session session = BuildSessionFactoryUtil.getSession()) {
+        Session session = null;
+        try {
+            session = BuildSessionFactoryUtil.getSession();
             transaction = session.beginTransaction();
             session.createQuery("DELETE Match m WHERE m.id = :id", Match.class)
                     .setParameter("id", id)
@@ -135,6 +136,10 @@ public class MatchRepository implements Repository<Long, Match> {
             }
             throw new DatabaseException(e.getMessage(),
                     HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } finally {
+            if (Objects.nonNull(session) && session.isOpen()) {
+                session.close();
+            }
         }
     }
 
@@ -146,15 +151,23 @@ public class MatchRepository implements Repository<Long, Match> {
     @Override
     public Match save(Match match) {
         Transaction transaction = null;
-        try (Session session = BuildSessionFactoryUtil.getSession()) {
+        Session session = null;
+        try {
+            session = BuildSessionFactoryUtil.getSession();
             transaction = session.beginTransaction();
             session.persist(match);
-            session.flush();
             transaction.commit();
             return match;
         } catch (Exception e) {
+            if (Objects.nonNull(transaction)) {
+                transaction.rollback();
+            }
             throw new DatabaseException(e.getMessage(),
                     HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        } finally {
+            if (Objects.nonNull(session) && session.isOpen()) {
+                session.close();
+            }
         }
     }
 }

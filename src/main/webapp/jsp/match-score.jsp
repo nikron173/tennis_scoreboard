@@ -15,16 +15,16 @@
                     <th>Set</th>
                 </tr>
                 <tr>
-                    <td>${requestScope.first_player.name}</td>
-                    <td>${requestScope.first_score.getPoint()}</td>
-                    <td>${requestScope.first_score.getGame()}</td>
-                    <td>${requestScope.first_score.getSet()}</td>
+                    <td>${requestScope.firstPlayer.name}</td>
+                    <td>${requestScope.firstPlayerViewPoint}</td>
+                    <td>${requestScope.firstScore.getGame()}</td>
+                    <td>${requestScope.firstScore.getSet()}</td>
                 </tr>
                 <tr>
-                    <td>${requestScope.second_player.name}</td>
-                    <td>${requestScope.second_score.getPoint()}</td>
-                    <td>${requestScope.second_score.getGame()}</td>
-                    <td>${requestScope.second_score.getSet()}</td>
+                    <td>${requestScope.secondPlayer.name}</td>
+                    <td>${requestScope.secondPlayerViewPoint}</td>
+                    <td>${requestScope.secondScore.getGame()}</td>
+                    <td>${requestScope.secondScore.getSet()}</td>
                 </tr>
             </table>
             <form action="${requestScope.context.contextPath}/match-score?uuid=${requestScope.uuid}"
