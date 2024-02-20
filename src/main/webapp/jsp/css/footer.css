@@ -1,0 +1,18 @@
+.footer {
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 70px;
+    background-color: #12bbbb;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-author {
+    font-size: 25px;
+    color: white;
+    font-weight: 700;
+}

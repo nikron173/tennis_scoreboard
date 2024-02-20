@@ -4,11 +4,12 @@
 
 <%@ include file="header.jsp"%>
 
-<div class="container-menu">
-    <div class="container-table">
+<div class="main">
+    <div class="main-menu">
         <div class="find_player">
             <form action="${pageContext.request.contextPath}/matches" method="get">
-                <input type="text" placeholder="Поиск игрока" name="filter_by_player_name">
+                <input class="match-form-input-fio form-input" type="text"
+                       placeholder="Поиск игрока" name="filter_by_player_name" required>
                 <button type="submit" class="btn">Поиск</button>
             </form>
         </div>
@@ -29,20 +30,20 @@
             </c:forEach>
         </table>
 
-        <c:choose>
-           <c:when test="${not empty requestScope.filterPlayerName}">
-               <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
-                   <a href="/matches?page=${num}&filter_by_player_name=${requestScope.filterPlayerName}">${num}</a>
-               </c:forEach>
-            </c:when>
-            <c:when test="${empty requestScope.filterPlayerName}">
-                <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
-                    <a href="/matches?page=${num}">${num}</a>
-                </c:forEach>
-            </c:when>
-        </c:choose>
-
-
+        <div class="pages">
+            <c:choose>
+               <c:when test="${not empty requestScope.filterPlayerName}">
+                   <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
+                       <a href="/matches?page=${num}&filter_by_player_name=${requestScope.filterPlayerName}">${num}</a>
+                   </c:forEach>
+                </c:when>
+                <c:when test="${empty requestScope.filterPlayerName}">
+                    <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
+                        <a href="/matches?page=${num}">${num}</a>
+                    </c:forEach>
+                </c:when>
+            </c:choose>
+        </div>
     </div>
 </div>
 

@@ -4,9 +4,16 @@
 
 <%@ include file="header.jsp"%>
 
-<div class="container-menu">
-    <div class="container-table">
-        <div class="table">
+<div class="main">
+    <div class="main-menu">
+        <div class="text-menu">
+            Матч
+        </div>
+        <div class="main-menu-table">
+            <form class="form-width" action="${requestScope.context.contextPath}/match-score?uuid=${requestScope.uuid}"
+                  method="post">
+                <button class="btn" type="submit" name="first_player" value="first_player">Игрок 1</button>
+            </form>
             <table>
                 <tr>
                     <th>Игроки</th>
@@ -27,11 +34,9 @@
                     <td>${requestScope.secondScore.getSet()}</td>
                 </tr>
             </table>
-            <form action="${requestScope.context.contextPath}/match-score?uuid=${requestScope.uuid}"
+            <form class="form-width" action="${requestScope.context.contextPath}/match-score?uuid=${requestScope.uuid}"
                   method="post">
-                <button type="submit" name="first_player" value="first_player">Игрок 1</button>
-                <br>
-                <button type="submit" name="second_player" value="second_player">Игрок 2</button>
+                <button class="btn" type="submit" name="second_player" value="second_player">Игрок 2</button>
             </form>
         </div>
     </div>

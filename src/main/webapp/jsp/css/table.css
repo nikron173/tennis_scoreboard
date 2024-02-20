@@ -1,0 +1,23 @@
+.main-menu-table {
+    flex: 1;
+    padding: 0 20% 0 20%;
+    /*border: 1px solid black;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+table {
+    border-radius: 5px;
+    font-size: 2em;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    flex: 1;
+}
+
+table, th, td {
+    border: 1px solid black;
+}

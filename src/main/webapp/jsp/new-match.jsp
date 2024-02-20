@@ -4,21 +4,28 @@
 
 <%@ include file="header.jsp"%>
 
-<div class="container-form">
-    <div class="class-form">
-        <form method="post" action="${requestScope.context.contextPath}/new-match">
-            <label>
-                Игрок 1
-                <input name="first_player" type="text" required>
-            </label>
-            <br>
-            <label>
-                Игрок 2
-                <input name="second_player" type="text" required>
-            </label>
-            <br>
-            <button type="submit" class="btn">Начать</button>
-        </form>
+<div class="main">
+    <div class="main-menu">
+        <div class="text-menu">
+            Регистрация нового матча
+        </div>
+        <div class="class-form">
+            <form method="post" action="${requestScope.context.contextPath}/new-match">
+                <label class="match-form-label">
+                    Игрок 1
+                    <input class="match-form-input-fio" name="first_player"
+                           placeholder="Введите имя игрока" type="text" required>
+                </label>
+                <br>
+                <label class="match-form-label">
+                    Игрок 2
+                    <input class="match-form-input-fio" name="second_player"
+                           placeholder="Введите имя игрока" type="text" required>
+                </label>
+                <br>
+                <button type="submit" class="btn">Начать</button>
+            </form>
+        </div>
     </div>
 </div>
 

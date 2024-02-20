@@ -4,13 +4,15 @@
 
 <%@ include file="header.jsp"%>
 
-<div class="container-menu">
-    <div class="h2-text">
-        <h2>Ошибки</h2>
+<div class="main">
+    <div class="main-menu">
+        <div class="text-menu">
+            Ошибки
+        </div>
+        <p class="errors">
+            ${requestScope.error}
+        </p>
     </div>
-    <p class="errors">
-        ${requestScope.error}
-    </p>
 </div>
 
 <%@ include file="footer.jsp"%>

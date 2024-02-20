@@ -3,7 +3,9 @@
 <%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>--%>
 <%--<!--FOOTER-->--%>
 <div class="footer">
-
+    <div class="footer-author">
+        &copy; Created by Nikron
+    </div>
 </div>
 <!--END FOOTER-->
 </body>
