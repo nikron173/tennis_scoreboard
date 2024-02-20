@@ -77,6 +77,15 @@
 
 .form-width {
 	width: 100px;
+
+}
+
+.form-right {
+	text-align: right;
+}
+
+.form-left {
+	text-align: left;
 }
 
 .btn:hover {

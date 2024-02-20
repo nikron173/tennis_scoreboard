@@ -43,6 +43,16 @@
       <artifactId>jakarta.servlet.jsp.jstl</artifactId>
       <version>3.0.1</version>
     </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.4.14</version>
+      <scope>test</scope>
+    </dependency>
+
+
+
   </dependencies>
   <build>
     <finalName>tennis_scoreboard</finalName>

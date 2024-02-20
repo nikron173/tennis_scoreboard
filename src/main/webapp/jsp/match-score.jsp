@@ -10,7 +10,7 @@
             Матч
         </div>
         <div class="main-menu-table">
-            <form class="form-width" action="${requestScope.context.contextPath}/match-score?uuid=${requestScope.uuid}"
+            <form class="form-width form-left" action="${requestScope.context.contextPath}/match-score?uuid=${requestScope.uuid}"
                   method="post">
                 <button class="btn" type="submit" name="first_player" value="first_player">Игрок 1</button>
             </form>
@@ -34,7 +34,7 @@
                     <td>${requestScope.secondScore.getSet()}</td>
                 </tr>
             </table>
-            <form class="form-width" action="${requestScope.context.contextPath}/match-score?uuid=${requestScope.uuid}"
+            <form class="form-width form-right" action="${requestScope.context.contextPath}/match-score?uuid=${requestScope.uuid}"
                   method="post">
                 <button class="btn" type="submit" name="second_player" value="second_player">Игрок 2</button>
             </form>
