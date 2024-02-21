@@ -59,9 +59,9 @@ public class MatchScoreController extends HttpServlet {
                     req.getParameter("second_player"));
         }
         if (Objects.nonNull(matchScore.getWinnerPlayer())) {
-            resp.sendRedirect("/matches");
+            resp.sendRedirect(req.getContextPath() + "/matches");
             return;
         }
-        resp.sendRedirect(String.format("/match-score?uuid=%s", matchScore.getId()));
+        resp.sendRedirect(String.format("%s/match-score?uuid=%s", req.getContextPath(), matchScore.getId()));
     }
 }

@@ -30,9 +30,6 @@ public class MatchesController extends HttpServlet {
             int countPage = matchService
                     .lastPageSizeByPlayerName(req.getParameter("filter_by_player_name"));
             System.out.println("Количество страниц - " + countPage);
-//            if (page > countPage) {
-//                throw new NotFoundResourceException("Ресурс не найден", HttpServletResponse.SC_NOT_FOUND);
-//            }
             List<MatchDto> matches = matchService.findByPlayerName(
                     req.getParameter("filter_by_player_name"), page
             );

@@ -35,6 +35,6 @@ public class NewMatchController extends HttpServlet {
                         .name(secondPlayerName)
                         .build()
         );
-        resp.sendRedirect(String.format("/match-score?uuid=%s", matchScore.getId()));
+        resp.sendRedirect(String.format("%s/match-score?uuid=%s", req.getContextPath(), matchScore.getId()));
     }
 }

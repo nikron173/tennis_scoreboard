@@ -22,7 +22,7 @@ public class ApplicationFilter extends HttpFilter {
         HttpServletResponse response = (HttpServletResponse) res;
         request.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        if (request.getRequestURI().equals("/")) {
+        if (request.getRequestURI().equals(request.getContextPath() + "/")) {
             request.getRequestDispatcher(JspPath.getPathJsp("main-menu")).forward(request, response);
             return;
         }

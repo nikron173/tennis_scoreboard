@@ -37,12 +37,12 @@
             <c:choose>
                <c:when test="${not empty requestScope.filterPlayerName}">
                    <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
-                       <a href="/matches?page=${num}&filter_by_player_name=${requestScope.filterPlayerName}">${num}</a>
+                       <a href="${pageContext.request.contextPath}/matches?page=${num}&filter_by_player_name=${requestScope.filterPlayerName}">${num}</a>
                    </c:forEach>
                 </c:when>
                 <c:when test="${empty requestScope.filterPlayerName}">
                     <c:forEach var="num" begin="1" end="${requestScope.countPage}" step="1">
-                        <a href="/matches?page=${num}">${num}</a>
+                        <a href="${pageContext.request.contextPath}/matches?page=${num}">${num}</a>
                     </c:forEach>
                 </c:when>
             </c:choose>

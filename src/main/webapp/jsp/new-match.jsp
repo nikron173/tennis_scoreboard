@@ -10,7 +10,7 @@
             Регистрация нового матча
         </div>
         <div class="class-form">
-            <form method="post" action="${requestScope.context.contextPath}/new-match">
+            <form method="post" action="${pageContext.request.contextPath}/new-match">
                 <label class="match-form-label">
                     Игрок 1
                     <input class="match-form-input-fio" name="first_player"
