@@ -12,4 +12,10 @@ public class DbInitializer implements ServletContextListener {
         ServletContextListener.super.contextInitialized(sce);
         BuildSessionFactoryUtil.createSessionFactory();
     }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        ServletContextListener.super.contextDestroyed(sce);
+        BuildSessionFactoryUtil.closeSessionFactory();
+    }
 }

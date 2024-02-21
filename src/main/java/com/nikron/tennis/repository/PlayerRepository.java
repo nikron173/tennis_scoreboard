@@ -2,7 +2,6 @@ package com.nikron.tennis.repository;
 
 import com.nikron.tennis.entity.Player;
 import com.nikron.tennis.exception.DatabaseException;
-import com.nikron.tennis.exception.DuplicateResourceException;
 import com.nikron.tennis.util.BuildSessionFactoryUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
