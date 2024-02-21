@@ -134,3 +134,23 @@
 .errors {
 	font-size: 1.5em;
 }
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	width: 100%;
+	align-items: start;
+}
+
+.back {
+	padding-top: 12px;
+	width: 90px;
+}
+
+.tm {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	padding-right: 100px;
+}

@@ -6,8 +6,13 @@
 
 <div class="main">
     <div class="main-menu">
-        <div class="text-menu">
-            Ошибки
+        <div class="container">
+            <div class="back">
+                <button class="btn" type="button" name="back" onclick="history.back()">Назад</button>
+            </div>
+            <div class="text-menu tm">
+                Ошибки
+            </div>
         </div>
         <p class="errors">
             ${requestScope.error}

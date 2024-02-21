@@ -37,14 +37,14 @@ public class MatchScoreService {
 
     public MatchScore create(PlayerDto firstPlayer, PlayerDto secondPlayer) {
         Optional<Player> firstOption = playerRepository.findByName(firstPlayer.getName());
-        Optional<Player> secondOption = playerRepository.findByName(secondPlayer.getName());
         Player first = firstOption.orElseGet(
                 () -> playerRepository.save(playerMapper.convertToEntity(firstPlayer))
         );
+        Optional<Player> secondOption = playerRepository.findByName(secondPlayer.getName());
         Player second = secondOption.orElseGet(
                 () -> playerRepository.save(playerMapper.convertToEntity(secondPlayer))
         );
-        if (first.getId().equals(second.getId())) {
+        if (first.getName().equals(second.getName())) {
             throw new BadRequestException("Матч не может состоять с одним и тем же участником",
                     HttpServletResponse.SC_BAD_REQUEST);
         }
