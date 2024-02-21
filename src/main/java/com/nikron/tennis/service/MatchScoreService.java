@@ -95,13 +95,26 @@ public class MatchScoreService {
 
     private void step(MatchScore matchScore, Score one, Score two, String player) {
         one.addPoint();
-        if (checkWinGame(one, two)) {
-            one.addGame();
-            resetPoint(matchScore);
-        }
-        if (checkWinSet(one, two)) {
-            one.addSet();
-            resetGame(matchScore);
+        if (matchScore.isTieBreak()) {
+            if (checkTieBreak(one, two)) {
+                one.addSet();
+                resetGame(matchScore);
+                resetPoint(matchScore);
+                matchScore.setTieBreak(false);
+            }
+        } else {
+            if (checkWinGame(one, two)) {
+                one.addGame();
+                resetPoint(matchScore);
+            }
+            if (one.getGame() == two.getGame() && one.getGame() == 6) {
+                matchScore.setTieBreak(true);
+                return;
+            }
+            if (checkWinSet(one, two)) {
+                one.addSet();
+                resetGame(matchScore);
+            }
         }
         if (checkWin(one)) {
             matchScore.setWinnerPlayer(player.equals("first_player") ?
@@ -116,6 +129,12 @@ public class MatchScoreService {
         }
     }
 
+    private boolean checkTieBreak (Score scoreOne, Score scoreTwo) {
+        return scoreOne.getPoint() >= 7 &&
+                Math.abs(scoreOne.getPoint() - scoreTwo.getPoint()) >= 2 &&
+                scoreOne.getPoint() > scoreTwo.getPoint();
+    }
+
     private boolean checkWinGame(Score scoreOne, Score scoreTwo) {
         return scoreOne.getPoint() >= 4 &&
                 Math.abs(scoreOne.getPoint() - scoreTwo.getPoint()) >= 2 &&
@@ -123,9 +142,9 @@ public class MatchScoreService {
     }
 
     private boolean checkWinSet(Score scoreOne, Score scoreTwo) {
-        return scoreOne.getGame() >= 6 &&
-                Math.abs(scoreOne.getGame() - scoreTwo.getGame()) >= 2 &&
-                scoreOne.getGame() > scoreTwo.getGame();
+        return (scoreOne.getGame() == 6 || scoreOne.getGame() == 7)
+                && scoreOne.getGame() > scoreTwo.getGame()
+                && Math.abs(scoreOne.getGame() - scoreTwo.getGame()) >= 2;
     }
 
     private boolean checkWin(Score score) {

@@ -18,4 +18,5 @@ public class MatchScore {
     private Player winnerPlayer;
     private final Score firstPlayerScore = new Score();
     private final Score secondPlayerScore = new Score();
+    private boolean tieBreak;
 }

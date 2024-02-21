@@ -26,20 +26,23 @@ public class MatchScoreController extends HttpServlet {
         UUID id = ValidParameter.getValidId(req, "uuid");
         MatchScore matchScore = scoreService.findById(id);
         req.setAttribute("uuid", id);
+        req.setAttribute("match", matchScore);
         req.setAttribute("firstPlayer", matchScore.getFirstPlayer());
         req.setAttribute("secondPlayer", matchScore.getSecondPlayer());
         req.setAttribute("firstScore", matchScore.getFirstPlayerScore());
         req.setAttribute("secondScore", matchScore.getSecondPlayerScore());
-        req.setAttribute("firstPlayerViewPoint",
-                ViewPointPlayerUtil.viewPoint(
-                        matchScore.getFirstPlayerScore().getPoint(),
-                        matchScore.getSecondPlayerScore().getPoint())
-        );
-        req.setAttribute("secondPlayerViewPoint",
-                ViewPointPlayerUtil.viewPoint(
-                        matchScore.getSecondPlayerScore().getPoint(),
-                        matchScore.getFirstPlayerScore().getPoint())
-        );
+        if (!matchScore.isTieBreak()) {
+            req.setAttribute("firstPlayerViewPoint",
+                    ViewPointPlayerUtil.viewPoint(
+                            matchScore.getFirstPlayerScore().getPoint(),
+                            matchScore.getSecondPlayerScore().getPoint())
+            );
+            req.setAttribute("secondPlayerViewPoint",
+                    ViewPointPlayerUtil.viewPoint(
+                            matchScore.getSecondPlayerScore().getPoint(),
+                            matchScore.getFirstPlayerScore().getPoint())
+            );
+        }
         req.getRequestDispatcher(JspPath.getPathJsp("match-score")).forward(req, resp);
     }
 

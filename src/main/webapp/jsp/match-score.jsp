@@ -9,6 +9,11 @@
         <div class="text-menu">
             Матч
         </div>
+        <c:if test="${requestScope.match.tieBreak}">
+            <div class="tie-break">
+                Тай-брейк
+            </div>
+        </c:if>
         <div class="main-menu-table">
             <form class="form-width form-left" action="${pageContext.request.contextPath}/match-score?uuid=${requestScope.uuid}"
                   method="post">
@@ -23,13 +28,27 @@
                 </tr>
                 <tr>
                     <td>${requestScope.firstPlayer.name}</td>
-                    <td>${requestScope.firstPlayerViewPoint}</td>
+                    <c:choose>
+                        <c:when test="${not requestScope.match.tieBreak}">
+                            <td>${requestScope.firstPlayerViewPoint}</td>
+                        </c:when>
+                        <c:when test="${requestScope.match.tieBreak}">
+                            <td>${requestScope.firstScore.getPoint()}</td>
+                        </c:when>
+                    </c:choose>
                     <td>${requestScope.firstScore.getGame()}</td>
                     <td>${requestScope.firstScore.getSet()}</td>
                 </tr>
                 <tr>
                     <td>${requestScope.secondPlayer.name}</td>
-                    <td>${requestScope.secondPlayerViewPoint}</td>
+                    <c:choose>
+                        <c:when test="${not requestScope.match.tieBreak}">
+                            <td>${requestScope.secondPlayerViewPoint}</td>
+                        </c:when>
+                        <c:when test="${requestScope.match.tieBreak}">
+                            <td>${requestScope.secondScore.getPoint()}</td>
+                        </c:when>
+                    </c:choose>
                     <td>${requestScope.secondScore.getGame()}</td>
                     <td>${requestScope.secondScore.getSet()}</td>
                 </tr>

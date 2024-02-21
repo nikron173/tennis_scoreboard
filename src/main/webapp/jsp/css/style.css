@@ -19,6 +19,12 @@
 	padding-bottom: 40px;
 }
 
+.tie-break {
+	font-size: 2em;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
 .nav-main {
 	width: 100%;
 }
