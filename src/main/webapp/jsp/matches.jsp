@@ -7,10 +7,13 @@
 <div class="main">
     <div class="main-menu">
         <div class="find_player">
-            <form action="${pageContext.request.contextPath}/matches" method="get">
+            <form class="form-height" action="${pageContext.request.contextPath}/matches" method="get">
                 <input class="match-form-input-fio form-input" type="text"
                        placeholder="Поиск игрока" name="filter_by_player_name" required>
                 <button type="submit" class="btn">Поиск</button>
+            </form>
+            <form class="form-height" action="${pageContext.request.contextPath}/matches" method="get">
+                <button type="submit" class="btn">Сбросить</button>
             </form>
         </div>
         <table>

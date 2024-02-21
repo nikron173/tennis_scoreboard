@@ -77,7 +77,10 @@
 
 .form-width {
 	width: 100px;
+}
 
+.form-height {
+	height: 50px;
 }
 
 .form-right {
