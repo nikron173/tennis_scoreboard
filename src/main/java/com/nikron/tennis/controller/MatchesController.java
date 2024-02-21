@@ -23,7 +23,7 @@ public class MatchesController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int page = Objects.isNull(req.getParameter("page")) ? 1 : ValidParameter.getNumber(req, "page");
+        int page = Objects.isNull(req.getParameter("page")) ? 1 : ValidParameter.getValidNumber(req, "page");
         if (page <= 0) throw new BadRequestException("Номер страницы не может быть отрицательным число или нулем.",
                 HttpServletResponse.SC_BAD_REQUEST);
         if (Objects.nonNull(req.getParameter("filter_by_player_name"))) {

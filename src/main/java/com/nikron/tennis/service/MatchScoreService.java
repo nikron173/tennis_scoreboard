@@ -74,18 +74,21 @@ public class MatchScoreService {
 
     public MatchScore game(UUID id, String player) {
         MatchScore matchScore = findById(id);
-        if ("first_player".equals(player)) {
+        if (matchScore.getFirstPlayer().getName().equals(player)) {
             step(matchScore,
                     matchScore.getFirstPlayerScore(),
                     matchScore.getSecondPlayerScore(),
+                    player
+            );
+        } else if (matchScore.getSecondPlayer().getName().equals(player)) {
+            step(matchScore,
+                    matchScore.getSecondPlayerScore(),
+                    matchScore.getFirstPlayerScore(),
                     player
             );
         } else {
-            step(matchScore,
-                    matchScore.getSecondPlayerScore(),
-                    matchScore.getFirstPlayerScore(),
-                    player
-            );
+            throw new BadRequestException("В матче с идентификатором " + id + " нет игрока с именем " + player,
+                    HttpServletResponse.SC_BAD_REQUEST);
         }
         return matchScore;
     }

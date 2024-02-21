@@ -1,8 +1,10 @@
 package com.nikron.tennis.controller;
 
 import com.nikron.tennis.entity.MatchScore;
+import com.nikron.tennis.exception.BadRequestException;
 import com.nikron.tennis.service.MatchScoreService;
 import com.nikron.tennis.util.JspPath;
+import com.nikron.tennis.util.ValidParameter;
 import com.nikron.tennis.util.ViewPointPlayerUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,9 +20,10 @@ import java.util.UUID;
 @WebServlet(urlPatterns = "/match-score")
 public class MatchScoreController extends HttpServlet {
     private final MatchScoreService scoreService = MatchScoreService.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UUID id = UUID.fromString(req.getParameter("uuid"));
+        UUID id = ValidParameter.getValidId(req, "uuid");
         MatchScore matchScore = scoreService.findById(id);
         req.setAttribute("uuid", id);
         req.setAttribute("firstPlayer", matchScore.getFirstPlayer());
@@ -43,13 +46,19 @@ public class MatchScoreController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         MatchScore matchScore;
+        if (Objects.isNull(req.getParameter("first_player"))
+                && Objects.isNull(req.getParameter("second_player"))) {
+            throw new BadRequestException("Не корректный запрос (не заданы параметры первого и второго игрока)",
+                    HttpServletResponse.SC_BAD_REQUEST);
+        }
         if (Objects.nonNull(req.getParameter("first_player"))) {
-            matchScore = scoreService.game(UUID.fromString(req.getParameter("uuid")), req.getParameter("first_player"));
+            matchScore = scoreService.game(UUID.fromString(req.getParameter("uuid")),
+                    req.getParameter("first_player"));
         } else {
-            matchScore = scoreService.game(UUID.fromString(req.getParameter("uuid")), req.getParameter("second_player"));
+            matchScore = scoreService.game(UUID.fromString(req.getParameter("uuid")),
+                    req.getParameter("second_player"));
         }
         if (Objects.nonNull(matchScore.getWinnerPlayer())) {
-            //req.getRequestDispatcher("/matches").forward(req, resp);
             resp.sendRedirect("/matches");
             return;
         }
